@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/InstaSnapGroup4/static/css/main.1f5eccaa.css",
-    "main.js": "/InstaSnapGroup4/static/js/main.2628f986.js",
+    "main.js": "/InstaSnapGroup4/static/js/main.dd041ab8.js",
     "static/js/787.d1d4a2c2.chunk.js": "/InstaSnapGroup4/static/js/787.d1d4a2c2.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/InstaSnapGroup4/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/InstaSnapGroup4/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -37,11 +37,11 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/InstaSnapGroup4/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/InstaSnapGroup4/index.html",
     "main.1f5eccaa.css.map": "/InstaSnapGroup4/static/css/main.1f5eccaa.css.map",
-    "main.2628f986.js.map": "/InstaSnapGroup4/static/js/main.2628f986.js.map",
+    "main.dd041ab8.js.map": "/InstaSnapGroup4/static/js/main.dd041ab8.js.map",
     "787.d1d4a2c2.chunk.js.map": "/InstaSnapGroup4/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1f5eccaa.css",
-    "static/js/main.2628f986.js"
+    "static/js/main.dd041ab8.js"
   ]
 }
