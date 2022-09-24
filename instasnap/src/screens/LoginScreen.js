@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export const LoginScreen = () => {
+export default function LoginScreen() {
     const classes = useStyles()
     let navigate = useNavigate()
 
