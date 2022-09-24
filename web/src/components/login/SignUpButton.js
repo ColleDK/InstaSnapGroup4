@@ -1,9 +1,9 @@
 import {styled} from "@mui/styles";
 import {COLORS} from "../../colors/colors";
-import {LoadingButton} from "@mui/lab";
+import {Button} from "@mui/material";
 
 
-export const LoginButton = styled(LoadingButton)({
+export const SignUpButton = styled(Button)({
     '&&&': {
         backgroundColor: COLORS.lightGray,
         color: 'black',
