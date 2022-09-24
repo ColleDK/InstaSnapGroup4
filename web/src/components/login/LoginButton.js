@@ -1,4 +1,3 @@
-import React from 'react'
 import {Button} from "@mui/material";
 import {styled} from "@mui/styles";
 import {COLORS} from "../../colors/colors";

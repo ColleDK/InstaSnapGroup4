@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Divider, Grid} from "@mui/material";
+import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {LoginButton} from "../components/login/LoginButton";
 import {COLORS} from "../colors/colors";

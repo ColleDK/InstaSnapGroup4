@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {LoginScreen} from './screens/LoginScreen';
 import {Routes, Route} from 'react-router-dom'
