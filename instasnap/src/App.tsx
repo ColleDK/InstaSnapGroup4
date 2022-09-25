@@ -12,8 +12,8 @@ function App() {
       <div className="App">
           <Routes>
               <Route path={NavigationLocations.DEFAULT} element={<Navigate to={NavigationLocations.LOGIN}/>}/>
-              <Route path={NavigationLocations.LOGIN} element={<LeftDrawer content={<LoginScreen/>}/>}/>
-              <Route path={NavigationLocations.SIGN_UP} element={<LeftDrawer content={<SignUpScreen/>}/>}/>
+              <Route path={NavigationLocations.LOGIN} element={<LoginScreen/>}/>
+              <Route path={NavigationLocations.SIGN_UP} element={<SignUpScreen/>}/>
               <Route path={NavigationLocations.MAIN} element={<LeftDrawer content={<Facebook/>}/>}/>
           </Routes>
       </div>

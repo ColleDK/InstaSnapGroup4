@@ -42,7 +42,7 @@ export default function LoginScreen() {
     let navigate = useNavigate()
 
     return (
-        <Grid container direction={"row"} style={{height: `calc(100vh - ${64}px)`}}>
+        <Grid container direction={"row"} style={{height: '100vh'}}>
             <Grid container spacing={4} item xs={12} md={8} className={classes.loginContainer} direction={"row"} alignContent={"center"}>
                 <Grid item xs={12} md={12}>
                     <Typography variant="h3" component="div" style={{color: COLORS.white, fontWeight: 'bold'}}>

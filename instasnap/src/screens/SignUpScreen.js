@@ -22,7 +22,7 @@ export const SignUpScreen = () => {
     const [date, setDate] = React.useState(dayjs())
 
     return (
-        <Grid container direction={"row"} style={{height: `calc(100vh - ${64}px)`}} className={classes.signUpContainer} alignContent={"space-evenly"}>
+        <Grid container direction={"row"} style={{height: '100vh'}} className={classes.signUpContainer} alignContent={"space-evenly"}>
             <Grid item xs={12} md={12} align={"center"}>
                 <SignUpAddPicture>
                     <AddPhotoAlternateOutlinedIcon style={{color: 'black'}} sx={{width: 100, height: 100, alignSelf: "center"}}/>
