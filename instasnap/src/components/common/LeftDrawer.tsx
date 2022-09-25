@@ -21,6 +21,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -93,6 +94,7 @@ const DrawerFooter = styled("div")(({ theme }) => ({
 }));
 
 export default function LeftDrawer() {
+    const navigate = useNavigate();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -176,7 +178,7 @@ export default function LeftDrawer() {
                     )}
                 </List>
                 <DrawerFooter>
-                    <ListItemButton>
+                    <ListItemButton onClick={(e) => navigate("/login")}>
                         <ListItemIcon>
                             <LogoutIcon style={{ color: "white", opacity: "50%" }} />
                         </ListItemIcon>
