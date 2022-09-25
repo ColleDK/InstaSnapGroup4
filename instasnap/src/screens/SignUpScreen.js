@@ -10,6 +10,9 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import React from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {LoginButton} from "../components/login/LoginButton";
+import {userDataStore} from "../stores/UserDataStore";
+import {useNavigate} from "react-router-dom";
+import {NavigationLocations} from "../util/navigation/NavigationLocations";
 
 const useStyles = makeStyles((theme) => ({
     signUpContainer: {
@@ -19,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignUpScreen = () => {
     const classes = useStyles()
+    let navigate = useNavigate()
+
+    const [name, setName] = React.useState("")
+    const [email, setEmail] = React.useState("")
+    const [password, setPassword] = React.useState("")
     const [date, setDate] = React.useState(dayjs())
 
     return (
@@ -29,9 +37,11 @@ export const SignUpScreen = () => {
                 </SignUpAddPicture>
                 <Divider sx={{"&::before, &::after": {borderColor: COLORS.white}}}><h1
                     style={{color: COLORS.white}}>Create account</h1></Divider>
-                <LoginInputField text={"Email"} type={"text"} width={'40%'}/>
+                <LoginInputField text={"Name"} type={"text"} width={'40%'} onChange={(event) => setName(event.target.value)} value={name}/>
                 <Divider sx={{height: '2vh', borderColor: COLORS.gray}}/>
-                <LoginInputField text={"Password"} type={"text"} width={'40%'}/>
+                <LoginInputField text={"Email"} type={"text"} width={'40%'} onChange={(event) => setEmail(event.target.value)} value={email}/>
+                <Divider sx={{height: '2vh', borderColor: COLORS.gray}}/>
+                <LoginInputField text={"Password"} type={"text"} width={'40%'} onChange={(event) => setPassword(event.target.value)} value={password}/>
                 <Divider sx={{height: '2vh', borderColor: COLORS.gray}}/>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
@@ -47,7 +57,10 @@ export const SignUpScreen = () => {
                     />
                 </LocalizationProvider>
                 <Divider sx={{height: '10vh', borderColor: COLORS.gray}}/>
-                <LoginButton variant={"contained"} onClick={(e) => {}}>Sign up</LoginButton>
+                <LoginButton variant={"contained"} onClick={(e) => {
+                    userDataStore.addUser({email: email, password: password, name: name, birthday: date})
+                    navigate(NavigationLocations.LOGIN)
+                }}>Sign up</LoginButton>
             </Grid>
         </Grid>
     )
