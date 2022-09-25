@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/InstaSnapGroup4/static/css/main.073c9b0a.css",
-    "main.js": "/InstaSnapGroup4/static/js/main.abe107a5.js",
+    "main.js": "/InstaSnapGroup4/static/js/main.3e47030c.js",
     "static/js/787.0346b0af.chunk.js": "/InstaSnapGroup4/static/js/787.0346b0af.chunk.js",
     "index.html": "/InstaSnapGroup4/index.html",
     "main.073c9b0a.css.map": "/InstaSnapGroup4/static/css/main.073c9b0a.css.map",
-    "main.abe107a5.js.map": "/InstaSnapGroup4/static/js/main.abe107a5.js.map",
+    "main.3e47030c.js.map": "/InstaSnapGroup4/static/js/main.3e47030c.js.map",
     "787.0346b0af.chunk.js.map": "/InstaSnapGroup4/static/js/787.0346b0af.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.abe107a5.js"
+    "static/js/main.3e47030c.js"
   ]
 }
