@@ -1,18 +1,22 @@
 import React from 'react';
 import './App.css';
-import LoginScreen from "./screens/LoginScreen";
 import LeftDrawer from "./components/common/LeftDrawer";
-import {Route, Routes} from "react-router-dom";
-
+import {Route, Routes, Navigate} from "react-router-dom";
+import LoginScreen from "./screens/LoginScreen";
+import {SignUpScreen} from "./screens/SignUpScreen";
+import {NavigationLocations} from "./util/navigation/NavigationLocations";
+import Facebook from "./screens/MainScreen";
 
 function App() {
   return (
-    <div className="App">
-        <Routes>
-            <Route path={"/"} element={<LeftDrawer/>}/>
-            <Route path={"login"} element={<LoginScreen/>}/>
-        </Routes>
-    </div>
+      <div className="App">
+          <Routes>
+              <Route path={NavigationLocations.DEFAULT} element={<Navigate to={NavigationLocations.LOGIN}/>}/>
+              <Route path={NavigationLocations.LOGIN} element={<LeftDrawer content={<LoginScreen/>}/>}/>
+              <Route path={NavigationLocations.SIGN_UP} element={<LeftDrawer content={<SignUpScreen/>}/>}/>
+              <Route path={NavigationLocations.MAIN} element={<LeftDrawer content={<Facebook/>}/>}/>
+          </Routes>
+      </div>
   );
 }
 

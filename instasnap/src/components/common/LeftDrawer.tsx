@@ -22,6 +22,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import {ReactNode} from "react";
 
 const drawerWidth = 240;
 
@@ -93,7 +94,7 @@ const DrawerFooter = styled("div")(({ theme }) => ({
     }
 }));
 
-export default function LeftDrawer() {
+export default function LeftDrawer({content}:{content?:ReactNode}) {
     const navigate = useNavigate();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -191,6 +192,7 @@ export default function LeftDrawer() {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
+                {content}
             </Main>
         </Box>
     );

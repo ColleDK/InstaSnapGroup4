@@ -8,17 +8,13 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Skeleton from "@mui/material/Skeleton";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-import LeftDrawer from "../components/common/LeftDrawer";
 
 interface MediaProps {
     loading?: boolean;
@@ -122,7 +118,6 @@ export default function Facebook() {
     };
     return (
         <div>
-            <LeftDrawer/>
             <ToggleButtonGroup
                 orientation="horizontal"
                 value={view}
