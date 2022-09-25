@@ -11,6 +11,7 @@ import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
+import {userDataStore} from "../stores/UserDataStore";
 
 const useStyles = makeStyles((theme) => ({
     dividerContainer: {
@@ -41,6 +42,11 @@ export default function LoginScreen() {
     const classes = useStyles()
     let navigate = useNavigate()
 
+    const [email, setEmail] = React.useState("")
+    const [password, setPassword] = React.useState("")
+
+    const [error, setError] = React.useState(false)
+
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
             <Grid container spacing={4} item xs={12} md={8} className={classes.loginContainer} direction={"row"} alignContent={"center"}>
@@ -50,14 +56,20 @@ export default function LoginScreen() {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Email"} width={'60%'}/>
+                    <LoginInputField text={"Email"} width={'60%'} onChange={(event) => setEmail(event.target.value)} value={email} error={error}/>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Password"} type={"password"} width={'60%'}/>
+                    <LoginInputField text={"Password"} type={"password"} width={'60%'} onChange={(event) => setPassword(event.target.value)} value={password} error={error}/>
                 </Grid>
 
                 <Grid item xs={12} md={12}>
-                    <LoginButton variant={"contained"} onClick={(e) => navigate(NavigationLocations.MAIN)}>Login</LoginButton>
+                    <LoginButton variant={"contained"} onClick={(e) => {
+                        if (userDataStore.doesUserExist({email: email, password: password})){
+                            navigate(NavigationLocations.MAIN)
+                        } else {
+                            setError(true)
+                        }
+                    }}>Login</LoginButton>
                 </Grid>
 
                 <Grid item xs={12} md={12}>
