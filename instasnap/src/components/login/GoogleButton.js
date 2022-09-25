@@ -1,5 +1,5 @@
 import {styled} from "@mui/styles";
-import {COLORS} from "../../colors/colors";
+import {COLORS} from "../../util/colors/Colors";
 import {Button} from "@mui/material";
 
 

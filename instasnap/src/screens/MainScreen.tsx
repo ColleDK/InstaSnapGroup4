@@ -122,7 +122,6 @@ export default function Facebook() {
     };
     return (
         <div>
-            <LeftDrawer/>
             <ToggleButtonGroup
                 orientation="horizontal"
                 value={view}

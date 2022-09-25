@@ -2,13 +2,15 @@ import React from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {FacebookButton} from "../components/login/FacebookButton";
-import {COLORS} from "../colors/colors";
+import {COLORS} from "../util/colors/Colors";
 import {LoginInputField} from "../components/login/LoginInputField";
 import {GoogleButton} from "../components/login/GoogleButton";
 import {CampusNetButton} from "../components/login/CampusNetButton";
 import {LoginButton} from "../components/login/LoginButton";
 import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
+import {NavigationLocations} from "../util/navigation/NavigationLocations";
+import Typography from "@mui/material/Typography";
 
 const useStyles = makeStyles((theme) => ({
     dividerContainer: {
@@ -40,24 +42,28 @@ export default function LoginScreen() {
     let navigate = useNavigate()
 
     return (
-        <Grid container direction={"row"} style={{height: '100vh'}} alignContent={"stretch"}>
+        <Grid container direction={"row"} style={{height: `calc(100vh - ${64}px)`}}>
             <Grid container spacing={4} item xs={12} md={8} className={classes.loginContainer} direction={"row"} alignContent={"center"}>
                 <Grid item xs={12} md={12}>
-                    <h1 style={{color: COLORS.white, fontWeight: 'bold'}}>Login to your account</h1>
+                    <Typography variant="h3" component="div" style={{color: COLORS.white, fontWeight: 'bold'}}>
+                        Login to your account
+                    </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Email"}/>
+                    <LoginInputField text={"Email"} width={'60%'}/>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Password"} type={"password"}/>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
-                    <LoginButton variant={"contained"} onClick={(e) => navigate("/")}>Login</LoginButton>
+                    <LoginInputField text={"Password"} type={"password"} width={'60%'}/>
                 </Grid>
 
                 <Grid item xs={12} md={12}>
-                    <h1 style={{color: COLORS.white, fontWeight: 'bold'}}>Or login with</h1>
+                    <LoginButton variant={"contained"} onClick={(e) => navigate(NavigationLocations.MAIN)}>Login</LoginButton>
+                </Grid>
+
+                <Grid item xs={12} md={12}>
+                    <Typography variant="h3" component="div" style={{color: COLORS.white, fontWeight: 'bold'}}>
+                        Or login with
+                    </Typography>
                 </Grid>
 
                 <Grid item xs={12} md={12}/>
@@ -83,15 +89,19 @@ export default function LoginScreen() {
                 </Grid>
 
             </Grid>
-            <Grid container item xs={12} md={4} className={classes.signUpContainer} direction={"row"} alignContent={"center"}>
+            <Grid container spacing={4} item xs={12} md={4} className={classes.signUpContainer} direction={"row"} alignContent={"center"}>
                 <Grid item xs={12} md={12}>
-                    <h1 style={{color: COLORS.white, fontWeight: 'bold'}}>New to InstaSnap?</h1>
+                    <Typography variant="h3" component="div" style={{color: COLORS.white, fontWeight: 'bold'}}>
+                        New to InstaSnap?
+                    </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <h3 style={{color: COLORS.white, fontWeight: 'bold'}}>Sign up now to unlock a great amount of features </h3>
+                    <Typography variant="h6" component="div" style={{color: COLORS.white, fontWeight: 'bold'}}>
+                        Sign up now to unlock a great amount of features
+                    </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <SignUpButton onClick={(e) => navigate("/signup")}>Sign up</SignUpButton>
+                    <SignUpButton onClick={(e) => navigate(NavigationLocations.SIGN_UP)}>Sign up</SignUpButton>
                 </Grid>
             </Grid>
         </Grid>
