@@ -1,5 +1,5 @@
 import {makeStyles} from "@mui/styles";
-import {Button, Divider, Grid, TextField} from "@mui/material";
+import {Divider, Grid, TextField} from "@mui/material";
 import {COLORS} from "../util/colors/Colors";
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {SignUpAddPicture} from "../components/signup/SignUpAddPicture";
