@@ -6,6 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import {SignUpScreen} from "./screens/SignUpScreen";
 import {NavigationLocations} from "./util/navigation/NavigationLocations";
 import Facebook from "./screens/MainScreen";
+import {observer} from "mobx-react-lite";
 
 function App() {
   return (
@@ -20,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
