@@ -6,6 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import {SignUpScreen} from "./screens/SignUpScreen";
 import {NavigationLocations} from "./util/navigation/NavigationLocations";
 import Facebook from "./screens/MainScreen";
+import CreatePostScreen from "./screens/NewPostScreen";
 import {observer} from "mobx-react-lite";
 
 function App() {
