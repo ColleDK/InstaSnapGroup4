@@ -17,6 +17,7 @@ function App() {
               <Route path={NavigationLocations.LOGIN} element={<LoginScreen/>}/>
               <Route path={NavigationLocations.SIGN_UP} element={<SignUpScreen/>}/>
               <Route path={NavigationLocations.MAIN} element={<LeftDrawer content={<Facebook/>}/>}/>
+              <Route path={NavigationLocations.CREATE_POST} element={<LeftDrawer content={<CreatePostScreen/>}/>}/>
           </Routes>
       </div>
   );
