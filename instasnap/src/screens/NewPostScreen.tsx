@@ -16,8 +16,6 @@ import Box from "@mui/material/Box";
 import { useState} from "react";
 import { Button } from "@mui/material";
 
-let imageText: String;
-
 interface MediaProps {
     loading?: boolean;
     bodyText?: string;
