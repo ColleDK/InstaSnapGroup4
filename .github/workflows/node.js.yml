@@ -26,7 +26,7 @@ jobs:
         cache-dependency-path: instasnap/package-lock.json
     - name: ci
       working-directory: ./instasnap
-      run: npm ci
+      run: npm ci --legacy-peer-deps
     - name: build
       run: npm run build --if-present
       working-directory: ./instasnap
