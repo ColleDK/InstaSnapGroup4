@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/InstaSnapGroup4/static/css/main.073c9b0a.css",
-    "main.js": "/InstaSnapGroup4/static/js/main.68739ff8.js",
-    "static/js/787.0346b0af.chunk.js": "/InstaSnapGroup4/static/js/787.0346b0af.chunk.js",
-    "index.html": "/InstaSnapGroup4/index.html",
-    "main.073c9b0a.css.map": "/InstaSnapGroup4/static/css/main.073c9b0a.css.map",
-    "main.68739ff8.js.map": "/InstaSnapGroup4/static/js/main.68739ff8.js.map",
-    "787.0346b0af.chunk.js.map": "/InstaSnapGroup4/static/js/787.0346b0af.chunk.js.map"
+    "main.css": "/static/css/main.073c9b0a.css",
+    "main.js": "/static/js/main.a591489d.js",
+    "static/js/787.0346b0af.chunk.js": "/static/js/787.0346b0af.chunk.js",
+    "index.html": "/index.html",
+    "main.073c9b0a.css.map": "/static/css/main.073c9b0a.css.map",
+    "main.a591489d.js.map": "/static/js/main.a591489d.js.map",
+    "787.0346b0af.chunk.js.map": "/static/js/787.0346b0af.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.68739ff8.js"
+    "static/js/main.a591489d.js"
   ]
 }
