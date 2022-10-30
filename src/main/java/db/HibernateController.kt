@@ -1,5 +1,6 @@
 package db
 
+import InstasnapKeys
 import db.model.User
 import org.hibernate.SessionFactory
 import org.hibernate.cfg.Configuration
@@ -15,8 +16,8 @@ object HibernateController {
             val configuration = Configuration().apply {
                 addAnnotatedClass(User::class.java)
 
-                setProperty("hibernate.connection.username", System.getenv("instasnapuser"))
-                setProperty("hibernate.connection.password", System.getenv("instasnappassword"))
+                setProperty("hibernate.connection.username", System.getenv(InstasnapKeys.DB_USER))
+                setProperty("hibernate.connection.password", System.getenv(InstasnapKeys.DB_PASS))
                 setProperty("hibernate.connection.url", "jdbc:postgresql://$url")
                 setProperty("hibernate.hbm2ddl.auto", "update")
             }
