@@ -114,6 +114,25 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
         <SettingsIcon style={{ color: "white" }} />
     ];
 
+    const links = [
+        {
+            to: '/profile',
+            name: 'Profile'
+        },
+        {
+            to: '/createPost',
+            name: 'Create post'
+        },
+        {
+            to: '/friendsActivity',
+            name: 'Friend\'s activity'
+        },
+        {
+            to: '/settings',
+            name: 'Settings'
+        },
+    ]
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -170,7 +189,7 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
                     {["Profile", "Create post", "Friend's activity", "Settings"].map(
                         (text, index) => (
                             <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton onClick={(e) => navigate(links[index].to)}>
                                     <ListItemIcon>{images[index]}</ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItemButton>
