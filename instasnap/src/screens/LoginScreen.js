@@ -45,7 +45,7 @@ export default function LoginScreen() {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
 
-    // const [error, setError] = React.useState(false)
+    const [error, setError] = React.useState(false)
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
@@ -64,7 +64,11 @@ export default function LoginScreen() {
 
                 <Grid item xs={12} md={12}>
                     <LoginButton loading={ tokenDataStore.state === LoginStates.LOGGING_IN } variant={"contained"} onClick={(e) => {
-                        tokenDataStore.login(email, password)
+                        if (email === "" || password === "") {
+                            setError(true)
+                        } else {
+                            tokenDataStore.login(email, password)
+                        }
                     }}>Login</LoginButton>
                 </Grid>
 
