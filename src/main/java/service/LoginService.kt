@@ -8,7 +8,7 @@ import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
 import service.exceptions.BadDataException
 import service.exceptions.BadPasswordLengthException
-import service.models.UserRemote
+import service.models.LoginRemote
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
@@ -16,32 +16,25 @@ import service.models.UserRemote
 class LoginService {
 
     @POST
-    fun postLoginData(user: UserRemote): String {
-
+    fun postLoginData(loginData: LoginRemote): String {
         when {
-            user.email.isEmpty() -> {
+            loginData.email.isEmpty() -> {
                 throw BadDataException("Email is not provided")
             }
-            user.firstName.isEmpty() -> {
-                throw BadDataException("First name is not provided")
-            }
-            user.lastName.isEmpty() -> {
-                throw BadDataException("Last name is not provided")
-            }
-            user.password.isEmpty() -> {
+            loginData.password.isEmpty() -> {
                 throw BadDataException("Password is not provided")
             }
-            user.password.length < MINIMUM_PASSWORD_LENGTH -> {
+            loginData.password.length < MINIMUM_PASSWORD_LENGTH -> {
                 throw BadPasswordLengthException("Password should be at least $MINIMUM_PASSWORD_LENGTH characters")
             }
         }
 
-        return JWTHandler().generateJwtToken(user = user)
+        return JWTHandler().generateJwtToken(loginData = loginData)
     }
 
     @POST
     @Path("tokentest")
-    fun postToken(token: String): UserRemote {
+    fun postToken(token: String): LoginRemote {
         return JWTHandler().validateUser(token)
     }
 

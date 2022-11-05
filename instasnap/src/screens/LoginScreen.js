@@ -11,7 +11,7 @@ import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
-import {userDataStore} from "../stores/UserDataStore";
+import {tokenDataStore} from "../stores/TokenDataStore";
 
 const useStyles = makeStyles((theme) => ({
     dividerContainer: {
@@ -64,11 +64,7 @@ export default function LoginScreen() {
 
                 <Grid item xs={12} md={12}>
                     <LoginButton variant={"contained"} onClick={(e) => {
-                        if (userDataStore.doesUserExist({email: email, password: password})){
-                            navigate(NavigationLocations.MAIN)
-                        } else {
-                            setError(true)
-                        }
+                        tokenDataStore.login(email, password)
                     }}>Login</LoginButton>
                 </Grid>
 
