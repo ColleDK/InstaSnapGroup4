@@ -1,8 +1,8 @@
 import {makeObservable, observable} from "mobx";
 
-const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : ""
+const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk"
 
-const LoginStates = {LOGGED_IN: "logged in", LOGGED_OUT: "logged out", LOGGING_IN: "loading"}
+export const LoginStates = {LOGGED_IN: "logged in", LOGGED_OUT: "logged out", LOGGING_IN: "loading"}
 
 class TokenDataStore {
     state = LoginStates.LOGGED_OUT
