@@ -1,6 +1,4 @@
 import {makeObservable, observable} from "mobx";
-import {NavigationLocations} from "../util/navigation/NavigationLocations";
-import {useNavigate} from "react-router-dom";
 
 const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk"
 
