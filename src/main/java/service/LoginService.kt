@@ -39,7 +39,7 @@ class LoginService {
                 from(User::class.java)
             }
 
-            session.createQuery(query).resultList.firstOrNull { it.email == loginData.email && BCrypt.checkpw(it.hashedPassword, loginData.password) }?.let {
+            session.createQuery(query).resultList.firstOrNull { it.email == loginData.email && BCrypt.checkpw(loginData.password, it.hashedPassword) }?.let {
                 return JWTHandler().generateJwtToken(loginData = loginData)
             }
         }

@@ -3,10 +3,13 @@ import {makeObservable, observable} from "mobx";
 const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk"
 
 export const LoginStates = {LOGGED_IN: "logged in", LOGGED_OUT: "logged out", LOGGING_IN: "loading"}
+export const SignupStates = {SIGNING_UP: "loading", ERROR: "failed"}
 
 class TokenDataStore {
     state = LoginStates.LOGGED_OUT
     token = ''
+
+    // navigate = useNavigate()
 
     constructor() {
         this.token = localStorage.getItem("token")
@@ -35,6 +38,29 @@ class TokenDataStore {
         ).catch((e) => {
                 console.log(e)
                 this.state = LoginStates.LOGGED_OUT
+            }
+        )
+    }
+
+    logout = () => {
+        this.token = ''
+    }
+
+    createUser = (name, email, password, birthday) => {
+        fetch(BASE_URL + "api/signup/", {
+            method: 'POST',
+            body: JSON.stringify({name: name, email: email, password: password, birthday: birthday.time}),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(
+            (response) => {
+                response.text().then(
+                    // () => { this.navigate(NavigationLocations.LOGIN) }
+                )
+            }
+        ).catch((e) => {
+                console.log(e)
             }
         )
     }
