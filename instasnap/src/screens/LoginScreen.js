@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {FacebookButton} from "../components/login/FacebookButton";
@@ -46,6 +46,12 @@ export default function LoginScreen() {
     const [password, setPassword] = React.useState("")
 
     const [error, setError] = React.useState(false)
+
+    useEffect(() => {
+        if (tokenDataStore.state === LoginStates.LOGGED_IN){
+            navigate(NavigationLocations.MAIN)
+        }
+    })
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>

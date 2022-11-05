@@ -10,9 +10,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import React from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {LoginButton} from "../components/login/LoginButton";
-import {userDataStore} from "../stores/UserDataStore";
-import {useNavigate} from "react-router-dom";
-import {NavigationLocations} from "../util/navigation/NavigationLocations";
+import {tokenDataStore} from "../stores/TokenDataStore";
 
 const useStyles = makeStyles((theme) => ({
     signUpContainer: {
@@ -22,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignUpScreen = () => {
     const classes = useStyles()
-    let navigate = useNavigate()
 
     const [name, setName] = React.useState("")
     const [email, setEmail] = React.useState("")
@@ -58,8 +55,11 @@ export const SignUpScreen = () => {
                 </LocalizationProvider>
                 <Divider sx={{height: '10vh', borderColor: COLORS.gray}}/>
                 <LoginButton variant={"contained"} onClick={(e) => {
-                    userDataStore.addUser({email: email, password: password, name: name, birthday: date})
-                    navigate(NavigationLocations.LOGIN)
+                    if (name === "" || email === "" || password === ""){
+                        // TODO show error message
+                    } else {
+                        tokenDataStore.createUser(name, email, password, date)
+                    }
                 }}>Sign up</LoginButton>
             </Grid>
         </Grid>

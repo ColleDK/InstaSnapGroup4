@@ -23,6 +23,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import {ReactNode} from "react";
+import {tokenDataStore} from "../../stores/TokenDataStore";
 
 const drawerWidth = 240;
 
@@ -179,7 +180,10 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
                     )}
                 </List>
                 <DrawerFooter>
-                    <ListItemButton onClick={(e) => navigate("/login")}>
+                    <ListItemButton onClick={(e) => {
+                        tokenDataStore.logout()
+                        navigate("/login")
+                    }}>
                         <ListItemIcon>
                             <LogoutIcon style={{ color: "white", opacity: "50%" }} />
                         </ListItemIcon>

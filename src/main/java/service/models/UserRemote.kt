@@ -3,8 +3,7 @@ package service.models
 import java.util.Date
 
 data class UserRemote(
-    val firstName: String = "",
-    val lastName: String = "",
+    val name: String = "",
     val email: String = "",
-    val birthday: Date = Date()
+    val birthday: Long = Date().time
 )
