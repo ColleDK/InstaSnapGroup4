@@ -1,4 +1,4 @@
 POST http://localhost:8080/api/login
 Content-Type: application/json
 
-{"firstName": "Johnny", "lastName": "Bravo", "email": "johnnybravo@gmail.com", "password": "johnnybravoiscool", "birthday": 10239138201}
+{"email": "johnnybravo@gmail.com", "password": "johnnybravoiscool"}

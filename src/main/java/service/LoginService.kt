@@ -1,47 +1,54 @@
 package service
 
 import JWTHandler
+import db.HibernateController
+import db.model.User
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
+import org.mindrot.jbcrypt.BCrypt
 import service.exceptions.BadDataException
 import service.exceptions.BadPasswordLengthException
-import service.models.UserRemote
+import service.exceptions.NotAuthorizedException
+import service.models.LoginRemote
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class LoginService {
+    private val sessionFactory = HibernateController.init("pgtest-db.instasnap.diplomportal.dk:6543/pg")
 
     @POST
-    fun postLoginData(user: UserRemote): String {
-
+    fun postLoginData(loginData: LoginRemote): String {
         when {
-            user.email.isEmpty() -> {
+            loginData.email.isEmpty() -> {
                 throw BadDataException("Email is not provided")
             }
-            user.firstName.isEmpty() -> {
-                throw BadDataException("First name is not provided")
-            }
-            user.lastName.isEmpty() -> {
-                throw BadDataException("Last name is not provided")
-            }
-            user.password.isEmpty() -> {
+            loginData.password.isEmpty() -> {
                 throw BadDataException("Password is not provided")
             }
-            user.password.length < MINIMUM_PASSWORD_LENGTH -> {
+            loginData.password.length < MINIMUM_PASSWORD_LENGTH -> {
                 throw BadPasswordLengthException("Password should be at least $MINIMUM_PASSWORD_LENGTH characters")
             }
         }
 
-        return JWTHandler().generateJwtToken(user = user)
+        sessionFactory.openSession().let { session ->
+            val query = session.criteriaBuilder.createQuery(User::class.java).apply {
+                from(User::class.java)
+            }
+
+            session.createQuery(query).resultList.firstOrNull { it.email == loginData.email && BCrypt.checkpw(it.hashedPassword, loginData.password) }?.let {
+                return JWTHandler().generateJwtToken(loginData = loginData)
+            }
+        }
+        throw NotAuthorizedException("Not authorized")
     }
 
     @POST
     @Path("tokentest")
-    fun postToken(token: String): UserRemote {
+    fun postToken(token: String): LoginRemote {
         return JWTHandler().validateUser(token)
     }
 

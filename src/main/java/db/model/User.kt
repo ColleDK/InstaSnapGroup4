@@ -17,5 +17,7 @@ data class User(
     @Column(name = "hashed_password")
     var hashedPassword: String = "",
     @Column(name = "birthday")
-    var birthday: Date = Date()
+    var birthday: Long = Date().time,
+    @Column(name = "email")
+    var email: String = ""
 )
