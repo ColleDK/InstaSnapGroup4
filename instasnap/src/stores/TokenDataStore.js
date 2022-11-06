@@ -12,7 +12,13 @@ class TokenDataStore {
     // navigate = useNavigate()
 
     constructor() {
-        this.token = localStorage.getItem("token")
+        let currentToken = localStorage.getItem("token")
+        if (currentToken !== ''){
+            this.validate(currentToken)
+        } else {
+            this.logout()
+        }
+
         makeObservable(this, {token: observable, state: observable})
     }
 
@@ -42,8 +48,38 @@ class TokenDataStore {
         )
     }
 
+    validate = (token) => {
+        this.state = LoginStates.LOGGING_IN
+        fetch(BASE_URL + "api/login/validate/", {
+            method: 'POST',
+            body: token,
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(
+            (response) => {
+                if (response.ok){
+                    response.text().then(
+                        (user) => {
+                            console.log("Token validated\nLogging in")
+                            this.state = LoginStates.LOGGED_IN
+                        }
+                    )
+                } else {
+                    console.log("Token invalidated")
+                    this.logout()
+                }
+            }
+        ).catch((e) => {
+            console.log("Token invalidated")
+            this.logout()
+        })
+    }
+
     logout = () => {
         this.token = ''
+        localStorage.clear()
+        this.state = LoginStates.LOGGED_OUT
     }
 
     createUser = (name, email, password, birthday) => {
