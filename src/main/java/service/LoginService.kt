@@ -47,8 +47,9 @@ class LoginService {
     }
 
     @POST
-    @Path("tokentest")
-    fun postToken(token: String): LoginRemote {
+    @Path("validate")
+    fun validateToken(token: String): LoginRemote {
+        println("Got token $token")
         return JWTHandler().validateUser(token)
     }
 

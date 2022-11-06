@@ -7,6 +7,7 @@ import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
+import org.apache.commons.validator.routines.EmailValidator
 import service.exceptions.BadDataException
 import service.exceptions.BadPasswordLengthException
 import service.models.CreateUserRemote
@@ -37,20 +38,19 @@ class SignupService {
             }
         }
 
-        val session = sessionFactory.openSession()
-        val transaction = session.beginTransaction()
-        session.persist(signupData.mapToLocal())
-        transaction.commit()
 
         // Simple check for email being formatted correct
-//        EMAIL_REGEX.find(signupData.email)?.let {
-//            sessionFactory.openSession().persist(signupData.mapToLocal())
-//        } ?: run {
-//            throw BadDataException("Email is not in correct format")
-//        }
-    }
-
-    companion object {
-        val EMAIL_REGEX = "[\\w\\d]+@[\\w\\d]+.(dk|com|org|edu)}".toRegex()
+        when(EmailValidator.getInstance().isValid(signupData.email)){
+            true -> {
+                val session = sessionFactory.openSession()
+                val transaction = session.beginTransaction()
+                session.persist(signupData.mapToLocal())
+                transaction.commit()
+            }
+            false -> {
+                println("Email ${signupData.email} is not valid")
+                throw BadDataException("Email is not in correct format")
+            }
+        }
     }
 }
