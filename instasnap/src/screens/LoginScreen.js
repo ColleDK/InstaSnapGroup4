@@ -69,7 +69,7 @@ export default function LoginScreen() {
                 </Grid>
 
                 <Grid item xs={12} md={12}>
-                    <LoginButton loading={ tokenDataStore.state === LoginStates.LOGGING_IN } variant={"contained"} onClick={(e) => {
+                    <LoginButton variant={"contained"} onClick={(e) => {
                         if (email === "" || password === "") {
                             setError(true)
                         } else {
