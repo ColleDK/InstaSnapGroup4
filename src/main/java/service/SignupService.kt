@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
 import org.apache.commons.validator.routines.EmailValidator
+import org.hibernate.SessionFactory
 import service.exceptions.BadDataException
 import service.exceptions.BadPasswordLengthException
 import service.models.CreateUserRemote
@@ -17,8 +18,7 @@ import kotlin.math.sign
 @Path("signup")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class SignupService {
-    private val sessionFactory = HibernateController.init("pgtest-db.instasnap.diplomportal.dk:6543/pg")
+class SignupService(private val sessionFactory: SessionFactory = HibernateController.init("pgtest-db.instasnap.diplomportal.dk:6543/pg")) {
 
     @POST
     fun postSignupData(signupData: CreateUserRemote) {
