@@ -41,13 +41,14 @@ class TokenDataStore {
                         }
                     )
                 } else {
-                    onError()
+                    console.log(response.body)
+                    onError(response.status)
                 }
             }
         ).catch((e) => {
-                console.log(e)
+                console.log(e.message)
                 this.state = LoginStates.LOGGED_OUT
-                onError()
+                onError(e.response.status)
             }
         )
     }
@@ -105,7 +106,11 @@ class TokenDataStore {
                         }
                     )
                 } else {
-                    console.log(response)
+                    response.text().then(
+                        (text) => {
+                            console.log(text)
+                        }
+                    )
                     onError()
                 }
             }

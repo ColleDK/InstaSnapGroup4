@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
 import {tokenDataStore, LoginStates} from "../stores/TokenDataStore";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     dividerContainer: {
@@ -47,6 +49,17 @@ export default function LoginScreen() {
 
     const [error, setError] = React.useState(false)
 
+    const notify = (text) => toast.error(text, {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
+
     useEffect(() => {
         if (tokenDataStore.state === LoginStates.LOGGED_IN){
             navigate(NavigationLocations.MAIN)
@@ -75,7 +88,15 @@ export default function LoginScreen() {
                         if (email === "" || password === "") {
                             setError(true)
                         } else {
-                            tokenDataStore.login(email, password, () => setError(true))
+                            tokenDataStore.login(email, password, (code) => {
+                                console.log(code)
+                                console.log(code.toString().startsWith('5', 0))
+                                if (code.toString().startsWith('5', 0)){
+                                    notify("Internal error occurred.\nPlease try again!")
+                                } else {
+                                    setError(true)
+                                }
+                            })
                         }
                     }}>Login</LoginButton>
                 </Grid>
@@ -124,6 +145,7 @@ export default function LoginScreen() {
                     <SignUpButton onClick={(e) => navigate(NavigationLocations.SIGN_UP)}>Sign up</SignUpButton>
                 </Grid>
             </Grid>
+            <ToastContainer />
         </Grid>
     )
 }
