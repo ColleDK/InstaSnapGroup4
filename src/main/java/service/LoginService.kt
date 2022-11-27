@@ -40,16 +40,16 @@ class LoginService {
             }
 
             session.createQuery(query).resultList.firstOrNull { it.email == loginData.email && BCrypt.checkpw(loginData.password, it.hashedPassword) }?.let {
-                return JWTHandler().generateJwtToken(loginData = loginData)
+                return JWTHandler().generateJwtToken(loginData = loginData).also { session.close() }
+            } ?: run {
+                throw NotAuthorizedException("Not authorized")
             }
         }
-        throw NotAuthorizedException("Not authorized")
     }
 
     @POST
     @Path("validate")
     fun validateToken(token: String): LoginRemote {
-        println("Got token $token")
         return JWTHandler().validateUser(token)
     }
 
