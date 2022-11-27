@@ -6,6 +6,6 @@ import {COLORS} from "../../util/colors/Colors";
 export const LoginInputField = ({text, type, width, value, onChange, error, helperText}) => {
     return (
         <TextField label={text} variant={"filled"} fullWidth={true} type={type}
-                   style={{color: COLORS.white, backgroundColor: COLORS.lightGray, width: width, borderRadius: 50, borderColor: COLORS.gray}} onChange={onChange} value={value} error={error} helperText={helperText}/>
+                   style={{color: COLORS.white, backgroundColor: COLORS.lightGray, width: width, borderColor: COLORS.gray}} onChange={onChange} value={value} error={error} helperText={helperText}/>
     )
 }

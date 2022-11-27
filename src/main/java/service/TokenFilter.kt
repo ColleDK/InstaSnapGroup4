@@ -11,9 +11,9 @@ import jakarta.ws.rs.ext.Provider
 class TokenFilter: ContainerRequestFilter {
     override fun filter(request: ContainerRequestContext) {
         when(request.uriInfo.path){
-            "login", "signup" -> { /* Let the user through so they can login and create a user */ }
+            "login/", "login/validate/", "signup/" -> { /* Let the user through so they can login and create a user */ }
             else -> {
-//                JWTHandler().validateUser(request.getHeaderString("Authorization"))
+                JWTHandler().validateUser(request.getHeaderString("Authorization"))
             }
         }
     }

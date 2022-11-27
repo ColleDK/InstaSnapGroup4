@@ -1,4 +1,4 @@
-import {makeObservable, observable} from "mobx";
+import {makeAutoObservable} from "mobx";
 
 const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk/"
 
@@ -7,22 +7,21 @@ export const SignupStates = {SIGNING_UP: "loading", ERROR: "failed"}
 
 class TokenDataStore {
     state = LoginStates.LOGGED_OUT
-    token = ''
-
-    // navigate = useNavigate()
+    token = ""
 
     constructor() {
         let currentToken = localStorage.getItem("token")
-        if (currentToken !== ''){
+        console.log("token: " + currentToken)
+        if (currentToken !== "" && currentToken !== null) {
             this.validate(currentToken)
         } else {
             this.logout()
         }
 
-        makeObservable(this, {token: observable, state: observable})
+        makeAutoObservable(this)
     }
 
-    login = (email, password) => {
+    login = (email, password, onError) => {
         this.state = LoginStates.LOGGING_IN
         fetch(BASE_URL + "api/login/", {
             method: 'POST',
@@ -32,18 +31,23 @@ class TokenDataStore {
             }
         }).then(
             (response) => {
-                response.text().then(
-                    (token) => {
-                        console.log("Got token " + token)
-                        this.token = token
-                        this.state = LoginStates.LOGGED_IN
-                        localStorage.setItem("token", token)
-                    }
-                )
+                if (response.ok){
+                    response.text().then(
+                        (token) => {
+                            console.log("Got token " + token)
+                            this.token = token
+                            this.state = LoginStates.LOGGED_IN
+                            localStorage.setItem("token", token)
+                        }
+                    )
+                } else {
+                    onError()
+                }
             }
         ).catch((e) => {
                 console.log(e)
                 this.state = LoginStates.LOGGED_OUT
+                onError()
             }
         )
     }
@@ -58,10 +62,12 @@ class TokenDataStore {
             }
         }).then(
             (response) => {
-                if (response.ok){
+                if (response.ok) {
                     response.text().then(
                         (user) => {
+                            console.log(user)
                             console.log("Token validated\nLogging in")
+                            this.token = token;
                             this.state = LoginStates.LOGGED_IN
                         }
                     )
@@ -82,7 +88,7 @@ class TokenDataStore {
         this.state = LoginStates.LOGGED_OUT
     }
 
-    createUser = (name, email, password, birthday) => {
+    createUser = (name, email, password, birthday, onError, onSuccess) => {
         fetch(BASE_URL + "api/signup/", {
             method: 'POST',
             body: JSON.stringify({name: name, email: email, password: password, birthday: birthday.time}),
@@ -91,12 +97,21 @@ class TokenDataStore {
             }
         }).then(
             (response) => {
-                response.text().then(
-                    // () => { this.navigate(NavigationLocations.LOGIN) }
-                )
+                if (response.ok){
+                    response.text().then(
+                        (text) => {
+                            console.log(text)
+                            onSuccess()
+                        }
+                    )
+                } else {
+                    console.log(response)
+                    onError()
+                }
             }
         ).catch((e) => {
                 console.log(e)
+                onError()
             }
         )
     }

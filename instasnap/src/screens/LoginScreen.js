@@ -51,7 +51,7 @@ export default function LoginScreen() {
         if (tokenDataStore.state === LoginStates.LOGGED_IN){
             navigate(NavigationLocations.MAIN)
         }
-    })
+    }, [navigate])
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
@@ -62,10 +62,12 @@ export default function LoginScreen() {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Email"} width={'60%'} onChange={(event) => setEmail(event.target.value)} value={email} error={error}/>
+                    <LoginInputField text={"Email"} width={'60%'} onChange={(event) => {setEmail(event.target.value); setError(false)}} value={email} error={error}/>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                    <LoginInputField text={"Password"} type={"password"} width={'60%'} onChange={(event) => setPassword(event.target.value)} value={password} error={error}/>
+                    <LoginInputField text={"Password"} type={"password"} width={'60%'} onChange={(event) => {
+                        setPassword(event.target.value); setError(false)
+                    }} value={password} error={error}/>
                 </Grid>
 
                 <Grid item xs={12} md={12}>
@@ -73,7 +75,7 @@ export default function LoginScreen() {
                         if (email === "" || password === "") {
                             setError(true)
                         } else {
-                            tokenDataStore.login(email, password)
+                            tokenDataStore.login(email, password, () => setError(true))
                         }
                     }}>Login</LoginButton>
                 </Grid>
