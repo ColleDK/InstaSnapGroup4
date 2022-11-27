@@ -51,7 +51,7 @@ export default function LoginScreen() {
         if (tokenDataStore.state === LoginStates.LOGGED_IN){
             navigate(NavigationLocations.MAIN)
         }
-    }, [navigate, tokenDataStore.state])
+    }, [navigate])
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
