@@ -48,11 +48,10 @@ export default function LoginScreen() {
     const [error, setError] = React.useState(false)
 
     useEffect(() => {
-        console.log("State: " + tokenDataStore.state)
         if (tokenDataStore.state === LoginStates.LOGGED_IN){
             navigate(NavigationLocations.MAIN)
         }
-    }, [tokenDataStore.state])
+    }, [navigate, tokenDataStore.state])
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
@@ -76,7 +75,7 @@ export default function LoginScreen() {
                         if (email === "" || password === "") {
                             setError(true)
                         } else {
-                            tokenDataStore.login(email, password, setError(true))
+                            tokenDataStore.login(email, password, () => setError(true))
                         }
                     }}>Login</LoginButton>
                 </Grid>
