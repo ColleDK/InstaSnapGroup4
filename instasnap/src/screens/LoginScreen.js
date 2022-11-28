@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {FacebookButton} from "../components/login/FacebookButton";
@@ -11,7 +11,7 @@ import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
-import {tokenDataStore, LoginStates} from "../stores/TokenDataStore";
+import {tokenDataStore} from "../stores/TokenDataStore";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {notifyError} from "../components/common/NotifyError";
