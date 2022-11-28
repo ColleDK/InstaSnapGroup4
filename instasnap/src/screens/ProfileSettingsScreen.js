@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import {Divider, Grid, TextField} from "@mui/material";
 import {LoginInputField} from "../components/login/LoginInputField";
 import React from "react";
