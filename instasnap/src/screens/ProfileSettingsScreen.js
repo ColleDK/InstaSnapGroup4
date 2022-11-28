@@ -9,8 +9,6 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {notifyError} from "../components/common/NotifyError";
-import {tokenDataStore} from "../stores/TokenDataStore";
-import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import {LoginButton} from "../components/login/LoginButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function ProfileSettingsScreen(){
-    let navigate = useNavigate()
     const classes = useStyles()
 
     const [nameError, setNameError] = React.useState(false)
