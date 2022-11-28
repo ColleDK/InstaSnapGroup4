@@ -13,7 +13,8 @@ import {tokenDataStore} from "../stores/TokenDataStore";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useNavigate} from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
+import {notifyError} from "../components/common/NotifyError";
 
 const useStyles = makeStyles((theme) => ({
     signUpContainer: {
@@ -33,17 +34,6 @@ export const SignUpScreen = () => {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [date, setDate] = React.useState(dayjs())
-
-    const notify = (text) => toast.error(text, {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-    });
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}} className={classes.signUpContainer} alignContent={"top"}>
@@ -89,10 +79,10 @@ export const SignUpScreen = () => {
                     setEmailError(email === "")
                     setPasswordError(password === "")
                     if (name === "" || email === "" || password === ""){
-                        notify("Make sure that all information is filled out!")
+                        notifyError("Make sure that all information is filled out!")
                         return;
                     }
-                    tokenDataStore.createUser(name, email, password, date, () => {setEmailError(true); setNameError(true); setPasswordError(true); notify("An error has occurred.\nMake sure that all data is correct and try again!")}, () => navigate(NavigationLocations.LOGIN))
+                    tokenDataStore.createUser(name, email, password, date, () => {setEmailError(true); setNameError(true); setPasswordError(true); notifyError("An error has occurred.\nMake sure that all data is correct and try again!")}, () => navigate(NavigationLocations.LOGIN))
                 }}>Sign up</LoginButton>
             </Grid>
             <ToastContainer />

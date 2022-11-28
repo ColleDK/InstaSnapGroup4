@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {FacebookButton} from "../components/login/FacebookButton";
@@ -11,9 +11,10 @@ import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
-import {tokenDataStore, LoginStates} from "../stores/TokenDataStore";
-import { ToastContainer, toast } from 'react-toastify';
+import {tokenDataStore} from "../stores/TokenDataStore";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {notifyError} from "../components/common/NotifyError";
 
 const useStyles = makeStyles((theme) => ({
     dividerContainer: {
@@ -49,23 +50,6 @@ export default function LoginScreen() {
 
     const [error, setError] = React.useState(false)
 
-    const notify = (text) => toast.error(text, {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-    });
-
-    useEffect(() => {
-        if (tokenDataStore.state === LoginStates.LOGGED_IN){
-            navigate(NavigationLocations.MAIN)
-        }
-    }, [navigate])
-
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
             <Grid container spacing={4} item xs={12} md={8} className={classes.loginContainer} direction={"row"} alignContent={"center"}>
@@ -92,10 +76,12 @@ export default function LoginScreen() {
                                 console.log(code)
                                 console.log(code.toString().startsWith('5', 0))
                                 if (code.toString().startsWith('5', 0)){
-                                    notify("Internal error occurred.\nPlease try again!")
+                                    notifyError("Internal error occurred.\nPlease try again!")
                                 } else {
                                     setError(true)
                                 }
+                            }, () => {
+                                navigate(NavigationLocations.MAIN)
                             })
                         }
                     }}>Login</LoginButton>
