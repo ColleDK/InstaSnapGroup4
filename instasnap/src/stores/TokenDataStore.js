@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 
 const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk/"
 
@@ -21,7 +21,7 @@ class TokenDataStore {
         makeAutoObservable(this)
     }
 
-    login = (email, password, onError) => {
+    login = (email, password, onError, onSuccess) => {
         this.state = LoginStates.LOGGING_IN
         fetch(BASE_URL + "api/login/", {
             method: 'POST',
@@ -38,6 +38,7 @@ class TokenDataStore {
                             this.token = token
                             this.state = LoginStates.LOGGED_IN
                             localStorage.setItem("token", token)
+                            onSuccess()
                         }
                     )
                 } else {

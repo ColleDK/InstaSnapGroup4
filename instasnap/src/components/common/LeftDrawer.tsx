@@ -24,6 +24,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import {ReactNode} from "react";
 import {tokenDataStore} from "../../stores/TokenDataStore";
+import {NavigationLocations} from "../../util/navigation/NavigationLocations";
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
@@ -109,11 +111,20 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
     };
 
     const images = [
+        <HomeIcon style={{color: "white"}}/>,
         <AccountCircleIcon style={{ color: "white" }} />,
         <AddPhotoAlternateIcon style={{ color: "white" }} />,
         <PeopleAltIcon style={{ color: "white" }} />,
         <SettingsIcon style={{ color: "white" }} />
     ];
+
+    const navigations = [
+        NavigationLocations.MAIN,
+        NavigationLocations.MAIN,
+        NavigationLocations.MAIN,
+        NavigationLocations.MAIN,
+        NavigationLocations.SETTINGS,
+    ]
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -130,7 +141,7 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Persistent drawer
+                        Instasnap
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -168,10 +179,10 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
                     </IconButton>
                 </ListItem>
                 <List style={{ backgroundColor: "#414040", color: "white" }}>
-                    {["Profile", "Create post", "Friend's activity", "Settings"].map(
+                    {["Homepage","Profile", "Create post", "Friend's activity", "Settings"].map(
                         (text, index) => (
                             <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton onClick={(e) => {navigate(navigations[index])}}>
                                     <ListItemIcon>{images[index]}</ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItemButton>
@@ -182,7 +193,7 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
                 <DrawerFooter>
                     <ListItemButton onClick={(e) => {
                         tokenDataStore.logout()
-                        navigate("/login")
+                        navigate(NavigationLocations.LOGIN)
                     }}>
                         <ListItemIcon>
                             <LogoutIcon style={{ color: "white", opacity: "50%" }} />
