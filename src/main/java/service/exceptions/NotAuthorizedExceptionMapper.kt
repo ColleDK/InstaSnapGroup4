@@ -5,8 +5,8 @@ import jakarta.ws.rs.ext.ExceptionMapper
 import jakarta.ws.rs.ext.Provider
 
 @Provider
-class NotAuthorizedExceptionMapper: ExceptionMapper<NoImplementationException> {
-    override fun toResponse(e: NoImplementationException): Response {
+class NotAuthorizedExceptionMapper: ExceptionMapper<NotAuthorizedException> {
+    override fun toResponse(e: NotAuthorizedException): Response {
         return Response.status(Response.Status.UNAUTHORIZED).entity(e.message).build()
     }
 
