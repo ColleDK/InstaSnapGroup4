@@ -1,5 +1,6 @@
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.JWTDecodeException
 import com.auth0.jwt.exceptions.SignatureVerificationException
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -39,6 +40,8 @@ class JWTHandler {
                 throw RuntimeException(e)
             }
         } catch (e: SignatureVerificationException){
+            throw NotAuthorizedException("Not authorized")
+        } catch (e: JWTDecodeException){
             throw NotAuthorizedException("Not authorized")
         }
     }

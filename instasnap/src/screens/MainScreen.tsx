@@ -14,7 +14,13 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import {postDataSTore} from "../stores/PostsDataStore";
+import {tokenDataStore} from "../stores/TokenDataStore";
+import {useNavigate} from "react-router-dom";
+import {NavigationLocations} from "../util/navigation/NavigationLocations";
+import {notifyError} from "../components/common/NotifyError";
+import {ToastContainer} from "react-toastify";
 
 interface MediaProps {
     loading?: boolean;
@@ -105,6 +111,13 @@ export default function Facebook() {
     const onToggle = (value = false) => setDir(value);
     const [view, setView] = React.useState("list");
 
+    const [postsStore] = React.useState(postDataSTore)
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        postsStore.getPosts((code: any) => { if (code >= 500) {notifyError("An internal error has occurred.\nPlease try to reload the page!")} else {tokenDataStore.logout(); navigate(NavigationLocations.LOGIN); notifyError("You are not authorized. Please login before you continue!") }})
+    }, [navigate, postsStore])
+
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
         nextView: string
@@ -159,6 +172,7 @@ export default function Facebook() {
                     </Grid>
                 </Grid>
             </Box>
+            <ToastContainer />
         </div>
     );
 }
