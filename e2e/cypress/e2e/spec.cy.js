@@ -1,5 +1,5 @@
-describe('My First Test', () => {
-  it('Visits the Kitchen Sink', () => {
+describe('Sign up test', () => {
+  it('Checks the signup flow', () => {
     cy.visit('https://instasnap.instasnap.diplomportal.dk')
 
     cy.contains('button', 'Sign up').click()
@@ -11,5 +11,13 @@ describe('My First Test', () => {
         .type('fake@email.com')
         .get('input')
         .should('have.value', 'fake@email.com')
+  })
+})
+
+describe('Not authenticated test', () => {
+  it('Checks that the user cannot access homepage without token', () => {
+    cy.visit('https://instasnap.instasnap.diplomportal.dk/#/start')
+
+    cy.url().should('include', '/login')
   })
 })
