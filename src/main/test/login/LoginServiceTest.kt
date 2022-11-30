@@ -1,6 +1,7 @@
 package login
 
 import JWTHandler
+import db.model.User
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -11,6 +12,7 @@ import org.junit.Test
 import service.LoginService
 import service.exceptions.NotAuthorizedException
 import service.models.LoginRemote
+import service.models.UserRemote
 import kotlin.test.fail
 
 class LoginServiceTest {
@@ -34,7 +36,7 @@ class LoginServiceTest {
 
     @Test
     fun testLoginAndValidationSuccess() {
-        every { service.postLoginData(TEST_DATA) } returns JWTHandler().generateJwtToken(loginData = TEST_DATA, key = TEST_SECRET_KEY)
+        every { service.postLoginData(TEST_DATA) } returns JWTHandler().generateJwtToken(user = TEST_USER, key = TEST_SECRET_KEY)
 
         val token = service.postLoginData(TEST_DATA)
 
@@ -45,7 +47,7 @@ class LoginServiceTest {
 
     @Test
     fun testLoginAndValidationFailure(){
-        every { service.postLoginData(TEST_DATA) } returns JWTHandler().generateJwtToken(loginData = TEST_DATA, key = TEST_SECRET_KEY)
+        every { service.postLoginData(TEST_DATA) } returns JWTHandler().generateJwtToken(user = TEST_USER, key = TEST_SECRET_KEY)
 
         val token = service.postLoginData(TEST_DATA)
         val malformedToken = token + "extra"
@@ -67,6 +69,7 @@ class LoginServiceTest {
 
     companion object {
         val TEST_DATA = LoginRemote("test@gmail.com", "test123456")
+        val TEST_USER = UserRemote("", "test@gmail.com")
         val TEST_SECRET_KEY = "testkey"
     }
 }

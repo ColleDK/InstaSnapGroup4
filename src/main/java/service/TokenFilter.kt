@@ -11,7 +11,7 @@ import jakarta.ws.rs.ext.Provider
 class TokenFilter: ContainerRequestFilter {
     override fun filter(request: ContainerRequestContext) {
         when(request.uriInfo.path){
-            "login/", "login/validate/", "signup/" -> { /* Let the user through so they can login and create a user */ }
+            "login/", "login/validate/", "signup/", "campusnet/login/", "campusnet/redirect/" -> { /* Let the user through so they can login and create a user */ }
             else -> {
                 // TODO Figure out why header is not passed here
 //                JWTHandler().validateUser(request.getHeaderString("Authorization"))

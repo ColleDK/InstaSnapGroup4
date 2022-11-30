@@ -120,6 +120,12 @@
             <version>1.13.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- HTTP client -->
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.13.11</version>
+        </dependency>
 
     </dependencies>
 

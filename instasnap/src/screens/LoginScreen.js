@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
 import {FacebookButton} from "../components/login/FacebookButton";
@@ -11,7 +11,7 @@ import {SignUpButton} from "../components/login/SignUpButton";
 import { useNavigate } from "react-router-dom";
 import {NavigationLocations} from "../util/navigation/NavigationLocations";
 import Typography from "@mui/material/Typography";
-import {tokenDataStore} from "../stores/TokenDataStore";
+import {LoginStates, tokenDataStore} from "../stores/TokenDataStore";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {notifyError} from "../components/common/NotifyError";
@@ -49,6 +49,15 @@ export default function LoginScreen() {
     const [password, setPassword] = React.useState("")
 
     const [error, setError] = React.useState(false)
+
+    console.log(tokenDataStore.state)
+    useEffect(
+        () => {
+            if (tokenDataStore.state === LoginStates.LOGGED_IN) {
+                navigate(NavigationLocations.MAIN)
+            }
+        },[navigate]
+    )
 
     return (
         <Grid container direction={"row"} style={{height: '100vh'}}>
@@ -103,7 +112,7 @@ export default function LoginScreen() {
                         <GoogleButton variant={"contained"}>Google</GoogleButton>
                     </Grid>
                     <Grid item xs={3} md={3}>
-                        <CampusNetButton variant={"contained"}>CampusNet</CampusNetButton>
+                        <CampusNetButton variant={"contained"} onClick={() => { tokenDataStore.loginCampusNet((code) => { if (code >= 500) notifyError("An internal error occurred, please try again!")}) }}>CampusNet</CampusNetButton>
                     </Grid>
                 </Grid>
 
