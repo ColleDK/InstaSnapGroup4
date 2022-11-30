@@ -105,12 +105,12 @@ export default function LoginScreen() {
                 <Grid item xs={12} md={12}/>
 
                 <Grid container spacing={2} direction={"row"} justifyContent={"center"}>
-                    <Grid item xs={3} md={3}>
-                        <FacebookButton variant={"contained"}>Facebook</FacebookButton>
-                    </Grid>
-                    <Grid item xs={3} md={3}>
-                        <GoogleButton variant={"contained"}>Google</GoogleButton>
-                    </Grid>
+                    {/*<Grid item xs={3} md={3}>*/}
+                    {/*    <FacebookButton variant={"contained"}>Facebook</FacebookButton>*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={3} md={3}>*/}
+                    {/*    <GoogleButton variant={"contained"}>Google</GoogleButton>*/}
+                    {/*</Grid>*/}
                     <Grid item xs={3} md={3}>
                         <CampusNetButton variant={"contained"} onClick={() => { tokenDataStore.loginCampusNet((code) => { if (code >= 500) notifyError("An internal error occurred, please try again!")}) }}>CampusNet</CampusNetButton>
                     </Grid>

@@ -1,25 +1,35 @@
 import {makeObservable, observable} from "mobx";
 
+const BASE_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8080/" : "https://instasnap.instasnap.diplomportal.dk/"
+
 class UserDataStore {
     users = []
 
     constructor() {
         makeObservable(this, {users: observable})
+        this.getUser()
     }
 
-    addUser = (user) => {
-        this.users.push(user)
-    }
-
-    doesUserExist = (user) => {
-        let i;
-        for (i = 0; i < this.users.length; i++) {
-            if (this.users[i].password === user.password && this.users[i].email === user.email) {
-                return true;
+    getUser = () => {
+        const token = localStorage.getItem("token")
+        fetch(BASE_URL + "api/users", {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
             }
-        }
-
-        return false;
+        }).then(
+            (response) => {
+                if (response.ok) {
+                    response.text().then(
+                        (user) => {
+                            console.log("Received user " + user)
+                            this.users = [...this.users, user]
+                        }
+                    )
+                }
+            }
+        )
     }
 }
 

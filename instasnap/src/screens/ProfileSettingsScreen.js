@@ -28,6 +28,16 @@ export default function ProfileSettingsScreen(){
     const [password, setPassword] = React.useState("")
     const [date, setDate] = React.useState(dayjs())
 
+    // useEffect(() => {
+    //     if (userDataStore.users.length > 0){
+    //         let user = userDataStore.users[0]
+    //         console.log(user)
+    //         setName(user.name)
+    //         setEmail(user.email)
+    //         setDate(dayjs(user.birthday))
+    //     }
+    // })
+
     return(
         <Grid container direction={"row"} style={{height:`calc(100vh - 7vh)`}} alignContent={"center"} className={classes.signUpContainer}>
             <Grid item xs={12} md={12}>
