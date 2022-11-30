@@ -21,6 +21,23 @@ class TokenDataStore {
         makeAutoObservable(this)
     }
 
+    loginCampusNet = (onError) => {
+        fetch(BASE_URL + "api/campusnet/login", {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(
+            (response) => {
+                if (response.ok){
+
+                } else {
+                    onError(response.status)
+                }
+            }
+        )
+    }
+
     login = (email, password, onError, onSuccess) => {
         this.state = LoginStates.LOGGING_IN
         fetch(BASE_URL + "api/login/", {

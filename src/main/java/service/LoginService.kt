@@ -2,6 +2,7 @@ package service
 
 import JWTHandler
 import db.HibernateController
+import db.mapToRemote
 import db.model.User
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.POST
@@ -13,6 +14,7 @@ import service.exceptions.BadDataException
 import service.exceptions.BadPasswordLengthException
 import service.exceptions.NotAuthorizedException
 import service.models.LoginRemote
+import service.models.UserRemote
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +42,7 @@ class LoginService {
             }
 
             session.createQuery(query).resultList.firstOrNull { it.email == loginData.email && BCrypt.checkpw(loginData.password, it.hashedPassword) }?.let {
-                return JWTHandler().generateJwtToken(loginData = loginData).also { session.close() }
+                return JWTHandler().generateJwtToken(it.mapToRemote()).also { session.close() }
             } ?: run {
                 throw NotAuthorizedException("Not authorized")
             }
@@ -49,7 +51,7 @@ class LoginService {
 
     @POST
     @Path("validate")
-    fun validateToken(token: String): LoginRemote {
+    fun validateToken(token: String): UserRemote {
         return JWTHandler().validateUser(token)
     }
 
