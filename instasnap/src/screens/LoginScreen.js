@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react'
 import {Button, Grid} from "@mui/material";
 import {makeStyles} from '@mui/styles';
-import {FacebookButton} from "../components/login/FacebookButton";
 import {COLORS} from "../util/colors/Colors";
 import {LoginInputField} from "../components/login/LoginInputField";
-import {GoogleButton} from "../components/login/GoogleButton";
 import {CampusNetButton} from "../components/login/CampusNetButton";
 import {LoginButton} from "../components/login/LoginButton";
 import {SignUpButton} from "../components/login/SignUpButton";
