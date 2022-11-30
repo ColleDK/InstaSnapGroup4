@@ -120,10 +120,10 @@ export default function LeftDrawer({content}:{content?:ReactNode}) {
 
     const navigations = [
         NavigationLocations.MAIN,
-        NavigationLocations.MAIN,
-        NavigationLocations.MAIN,
-        NavigationLocations.MAIN,
         NavigationLocations.SETTINGS,
+        NavigationLocations.MAIN,
+        NavigationLocations.MAIN,
+        NavigationLocations.MAIN,
     ]
 
     return (
