@@ -14,8 +14,8 @@ import service.exceptions.NotAuthorizedException
 import service.models.UserRemote
 import java.lang.Exception
 
-const val URI = "https://auth.dtu.dk/dtu/?service=https://localhost:8080/api/campusnet/redirect"
-const val REDIRECT_URI = "https://localhost:3000/?token="
+const val URI = "https://auth.dtu.dk/dtu/?service=https://instasnap.instasnap.diplomportal.dk/api/campusnet/redirect"
+const val REDIRECT_URI = "https://instasnap.instasnap.diplomportal.dk/?token="
 
 @Path("campusnet")
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,7 +33,7 @@ class CampusNetService(private val sessionFactory: SessionFactory = HibernateCon
     fun callback(@QueryParam("ticket") cnTicket: String): Response {
         println(cnTicket)
 
-        val body = Unirest.get("https://auth.dtu.dk/dtu/validate?service=https://localhost:8080/api/campusnet/redirect&ticket=$cnTicket").asString().body
+        val body = Unirest.get("https://auth.dtu.dk/dtu/validate?service=https://instasnap.instasnap.diplomportal.dk/api/campusnet/redirect&ticket=$cnTicket").asString().body
         println("body: $body")
         BODY_SUCCESS_REGEX.find(body)?.destructured?.component1()?.let { id ->
             val user = User(name = id)
